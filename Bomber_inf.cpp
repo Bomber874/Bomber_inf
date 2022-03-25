@@ -243,11 +243,66 @@ void lab45() {
 		"x2 = " << ((-b - sqrt(d)) / (2 * a));
 }
 
+void lab54() {
+	int maxn = 0;
+	int cur = 0;
+
+	while (true) {
+		std::cin >> cur;
+		if (cur == 0)
+			break;
+		if (cur > maxn)
+			maxn = cur;
+	}
+	std::cout << "Максимальноечисло: " << maxn;
+}
+
+int factorial(int N) {
+	int out = 1;
+	for (int i = 1; i <= N; i++) {
+		out *= i;
+	}
+	return out;
+}
+
+void lab55(){
+	int N = 0;
+	std::cin >> N;
+	std::cout << factorial(N);
+}
+
+void lab56() {
+	int _max = 0;
+	double M = 0;
+	double N = 0;
+
+	std::cin >> M >> N;
+	
+	if ( N > M ) {
+		_max = N;
+		N = M;
+		M = _max;
+	}
+
+	//std::cout << fmod(M, N) << " " << (M / N);
+
+	int mod = N;
+	while (true) {
+		if (fmod(M, mod) == 0) {
+			std::cout << "НОД = " << mod;
+			break;
+		}
+		mod = fmod(M, mod);
+		std::cout << mod << std::endl;
+	}
+}
+
+
 int main()
 {
 	char exitKey;
 	setlocale(LC_ALL, "Rus");
-	lab4555();
+	lab56();
 	std::cin >> exitKey;
 	return 0;
 }
@@ -255,3 +310,5 @@ int main()
 //5. Создайте программу, для решения квадратного уравнения ax2 + bx + c = 0. Коэффициенты a, b и c вводятся с клавиатуры.Результатом является значение корней уравнения или сообщение "корней нет".
 //6. Дана координата поля шахматной доски(например е5).Вывести цвет поля(черный или белый).Поле a1 – чёрное.
 //5---2. Даны координаты двух различных полей шахматной доски. Проверьте, может ли ладья за один ход перейти с одного поля на другое
+// Циклы
+//4 6 8 9 10 11 12
