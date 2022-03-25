@@ -118,11 +118,92 @@ void lab466()
 
 }
 
+int getIntByChar(char in) {
+	switch (in){
+		case ('a'):
+			return 0;
+			break;
+		case ('b'):
+			return 1;
+			break;
+		case ('c'):
+			return 2;
+			break;
+		case ('d'):
+			return 3;
+			break;
+		case ('e'):
+			return 4;
+			break;
+		case ('f'):
+			return 5;
+			break;
+		case ('g'):
+			return 6;
+			break;
+		case ('h'):
+			return 7;
+			break;
+	default:
+		break;
+	}
+	return 404; //Не найдено
+}
+
+void lab4666()
+{
+	std::string input = "";
+	std::cin >> input;
+	const char white = 8;
+
+	bool tbl[8][8] = {};
+	for (int i = 0; i <= 7; i++) {
+		for (int j = 0; j <= 7; j++) {
+			tbl[i][j] = (fmod(j, 2) != 0 ? (fmod(i, 2) != 0 ? true : false) : (fmod(i, 2) != 0 ? false : true));
+		}
+	}
+	for (int i = 0; i <= 7; i++) {
+		for (int j = 0; j <= 7; j++) {
+			std::cout << (tbl[i][j] ? ' ' : '@') << ' ';
+		}
+		std::cout << "\n";
+	}
+	std::cout << "Вы ввели: Строка: " << input[0] << "\nСтолбец: " << input[1] << std::endl <<
+		"Эта ячейка: " << (tbl[getIntByChar(input[0])][input[1]] ? "Белая" : "Чёрная") << "\n";
+
+
+}
+
+void lab45() {
+	float a, b, c, d = 0;
+	std::cin >> a;
+	std::cin >> b;
+	std::cin >> c;
+	if (a == 0) {
+		std::cout << "Уравнение не является квадратным";
+		return;
+	}
+	d = (b * b) - (4 * a * c);
+	std::cout << "D=" << d <<std::endl;
+	if (d < 0) {
+		std::cout << "Нет корней\n";
+		return;
+	}
+	if (d == 0) {
+		std::cout << "1 корень\n";
+		std::cout << (-b / 2 * a) << std::endl;
+		return;
+	}
+	std::cout << "2 корня\n" <<
+		"x1 = " << ((-b + sqrt(d)) / (2 * a)) << std::endl <<
+		"x2 = " << ((-b - sqrt(d)) / (2 * a));
+}
+
 int main()
 {
 	char exitKey;
 	setlocale(LC_ALL, "Rus");
-	lab466();
+	lab4666();
 	std::cin >> exitKey;
 	return 0;
 }
