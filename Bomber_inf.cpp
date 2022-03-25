@@ -159,17 +159,61 @@ void lab4666()
 	bool tbl[8][8] = {};
 	for (int i = 0; i <= 7; i++) {
 		for (int j = 0; j <= 7; j++) {
-			tbl[i][j] = (fmod(j, 2) != 0 ? (fmod(i, 2) != 0 ? true : false) : (fmod(i, 2) != 0 ? false : true));
+			tbl[i][j] = (fmod(j, 2) != 0 ? (fmod(i, 2) != 0 ? false : true) : (fmod(i, 2) != 0 ? true : false));
 		}
 	}
 	for (int i = 0; i <= 7; i++) {
 		for (int j = 0; j <= 7; j++) {
-			std::cout << (tbl[i][j] ? ' ' : '@') << ' ';
+			std::cout << (tbl[i][j] ? '@' : ' ') << ' ';
+			//std::cout << tbl[i][j] << ' ';
 		}
 		std::cout << "\n";
 	}
 	std::cout << "Вы ввели: Строка: " << input[0] << "\nСтолбец: " << input[1] << std::endl <<
-		"Эта ячейка: " << (tbl[getIntByChar(input[0])][input[1]] ? "Белая" : "Чёрная") << "\n";
+		"Эта ячейка: " << (tbl[getIntByChar(input[0])][-48 + input[1]-1] ? "Белая" : "Чёрная") << "\n";
+	std::cout << getIntByChar(input[0]) << " " << (-48+input[1]-1);
+
+
+}
+
+void lab4555()
+{
+	std::string input1, input2 = "";
+	std::cin >> input1;
+	std::cin >> input2;
+	bool tbl[8][8] = {};
+	for (int i = 0; i <= 7; i++) {
+		for (int j = 0; j <= 7; j++) {
+			tbl[i][j] = (fmod(j, 2) != 0 ? (fmod(i, 2) != 0 ? false : true) : (fmod(i, 2) != 0 ? true : false));
+		}
+	}
+	for (int i = 0; i <= 7; i++) {
+		for (int j = 0; j <= 7; j++) {
+			if ((-97 + input1[0] == j && -48 + input1[1]-1 == i) || (-97 + input2[0] == j && -48 + input2[1]-1 == i)) {
+				std::cout << '@' << ' ';
+			}
+			else
+				std::cout << (tbl[i][j] ? '#' : ' ') << ' ';
+			//std::cout << tbl[i][j] << ' ';
+		}
+		std::cout << "\n";
+	}
+	int x1, x2, y1, y2 = 0;
+	x1 = -97 + input1[0];
+	y1 = -48 + input1[1] - 1;
+
+	x2 = -97 + input2[0];
+	y2 = -48 + input2[1] - 1;
+
+	std::cout << (x1 - x2) << ":" << (y1 - y2) << std::endl;
+	if ((abs(x1 - x2) == 1 && abs(y1 - y2) == 2) || (abs(x1 - x2) == 2 && abs(y1 - y2) == 1))
+		std::cout << "Можно\n";
+	else
+		std::cout << "Нельзя\n";
+
+	//std::cout << "Вы ввели: Строка: " << input[0] << "\nСтолбец: " << input[1] << std::endl <<
+	//	"Эта ячейка: " << (tbl[getIntByChar(input[0])][-48 + input[1] - 1] ? "Белая" : "Чёрная") << "\n";
+	//std::cout << getIntByChar(input[0]) << " " << (-48 + input[1] - 1);
 
 
 }
@@ -203,10 +247,11 @@ int main()
 {
 	char exitKey;
 	setlocale(LC_ALL, "Rus");
-	lab4666();
+	lab4555();
 	std::cin >> exitKey;
 	return 0;
 }
 
 //5. Создайте программу, для решения квадратного уравнения ax2 + bx + c = 0. Коэффициенты a, b и c вводятся с клавиатуры.Результатом является значение корней уравнения или сообщение "корней нет".
 //6. Дана координата поля шахматной доски(например е5).Вывести цвет поля(черный или белый).Поле a1 – чёрное.
+//5---2. Даны координаты двух различных полей шахматной доски. Проверьте, может ли ладья за один ход перейти с одного поля на другое
