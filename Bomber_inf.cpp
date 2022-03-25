@@ -297,12 +297,44 @@ void lab56() {
 	}
 }
 
+void lab58() {
+	int input = 0;
+	std::cin >> input;
+	for (int i = input / 2; i > 0; i--) {
+		if (fmod(input, i) == 0) {
+			std::cout << i << std::endl;
+		}
+	}
+}
+
+void lab510() {
+	int lastFib[2] = { 0,1 };
+	int N = 0;
+	int fib = 0;
+	std::cin >> N;
+	if (N < 2) {
+		std::cout << "Число должно быть >= 2";
+		return;
+	}
+	for (int i = 0; i < N; i++) {
+		fib = lastFib[0] + lastFib[1];
+		std::cout << fib << "\n";
+		lastFib[0] = lastFib[1];
+		lastFib[1] = fib;
+	}
+}
+
+//void lab512() {
+//	int x = 0;
+//	std::cin >> x;
+//	for (int n = 0; )
+//}
 
 int main()
 {
 	char exitKey;
 	setlocale(LC_ALL, "Rus");
-	lab56();
+	lab510();
 	std::cin >> exitKey;
 	return 0;
 }
@@ -311,4 +343,4 @@ int main()
 //6. Дана координата поля шахматной доски(например е5).Вывести цвет поля(черный или белый).Поле a1 – чёрное.
 //5---2. Даны координаты двух различных полей шахматной доски. Проверьте, может ли ладья за один ход перейти с одного поля на другое
 // Циклы
-//4 6 8 9 10 11 12
+//4 6 8 10 12
