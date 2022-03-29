@@ -1,0 +1,136 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+
+void lab71(){
+    string name;
+    string author = "Вася";
+    cout << "Как вас зовут?\n";
+    cin >> name;
+    cout << "Привет " << name << ((name == author)? "!" : ", а где Вася?");
+}
+
+void lab72(){
+    string in;
+    cout << "Введите слово(Кириллицей)\n";
+    cin >> in;
+    cout << "Длина слова " << in << ":" << in.length()/2;
+}
+
+void lab73(){  // Не работает с кириллицей
+    string in;
+    char sim;
+    cout << "Введите строку"; cin >> in;
+    cout << "Введите символ для поиска в строке"; cin >> sim;
+    cout << (in.find(sim) > in.length()? "Символ не встречается" : "Символ присутствует");
+}
+
+void lab74(){  // Не работает с кириллицей
+    string first = "Test";
+    string second = "es";
+    cout << (first.find(second) > first.length()? "Строка не является подстрокой" : "Строка является подстрокой");
+
+}
+// Кириллица не работает, поэтому позицию делю на 2 (т.к. она занимает 2 английских символов)
+// Пробелы считаются как нужно, поэтому из-за них возможна погрешность
+void lab75(){
+    string test;
+    std::getline(cin , test);
+    cout << "Первая запятая: " << test.find_first_of(',')/2 << "\nВторая запятая: " << test.find_last_of(',')/2;
+}
+
+void lab76(){  // Опять возня с кириллицей
+    string str;
+    char symbol;
+    int sum = 0;
+    std::getline(cin , str);
+    cin >> symbol;
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] == symbol){
+            sum++;
+            cout << "+";
+        }
+    cout << sum;
+}
+
+void lab77(){
+    string str;
+    std::getline(cin , str);
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] == ' '){
+            str[i] = ',';
+        }
+    cout << endl << str;
+}
+
+void lab78(){
+    string str;
+    int sum = 1;  // 1, т.к. последнее слово в предложении идёт без пробела на конце
+    std::getline(cin , str);
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] == ' ' || str[i] == '\0'){
+            sum++;
+        }
+    cout << endl << sum;
+}
+
+void lab79(){
+    string str;
+    std::getline(cin , str);
+    str[0] = str[0]-32; // Я ищу слова через пробелы, поэтому первое слово придётся обработать самому
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] == ' '){
+            str[i+1] = str[i+1]-32;
+        }
+    cout << endl << str;
+}
+
+void lab710(){
+    string str;
+    int sum = 0;
+    std::getline(cin , str);
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] <= 57 && str[i] >= 48){
+            sum++;
+        }
+    cout << endl << sum;
+}
+
+void lab711(){
+    string str;
+    int sum = 0;
+    std::getline(cin , str);
+    for (int i = 0; i < str.length(); i++)
+        if (str[i] <= 57 && str[i] >= 48){
+            sum += str[i]-48;
+        }
+    cout << endl << sum;
+}
+// WIP
+void lab712(){
+    string str;
+    string out;
+    std::getline(cin , str);
+    do{
+        cout << endl << str;
+        int spacePos = str.find_first_of(' ');
+        if (spacePos+1 > out.length())
+            out = str.substr(0, spacePos);
+        str.erase(0, spacePos);
+    }while(str.length() > 0);
+    cout << endl << out;
+}
+
+int main()
+{
+    char exitKey;
+    setlocale(LC_ALL, "Rus");
+    lab712();
+    cin >> exitKey;
+    return 0;
+}
