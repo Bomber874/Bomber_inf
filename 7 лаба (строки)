@@ -119,9 +119,11 @@ void lab712(){
     do{
         cout << endl << str;
         int spacePos = str.find_first_of(' ');
-        if (spacePos+1 > out.length())
-            out = str.substr(0, spacePos);
-        str.erase(0, spacePos);
+        if(spacePos == -1)
+            spacePos = str.length()-1;
+        if (spacePos > out.length())
+            out = str.substr(0, spacePos+1);
+        str.erase(0, spacePos+1);
     }while(str.length() > 0);
     cout << endl << out;
 }
