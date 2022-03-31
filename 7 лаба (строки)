@@ -128,6 +128,20 @@ void lab712(){
     cout << endl << out;
 }
 
+void lab713(){
+    string str;
+    std::getline(cin , str);
+    bool cont = true;
+    for(int i = 0; i < str.length(); i++){
+        if (!cont) break;
+        for(int j = 0; j < str.length(); j++)
+            if (str[i] == str[j] && i != j){
+                cout << "Найдены одинаковые символы: " << str[i] << endl;
+                cont = false;
+            }
+    }
+}
+
 int main()
 {
     char exitKey;
