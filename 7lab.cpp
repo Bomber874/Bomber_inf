@@ -115,8 +115,7 @@ void lab711() {
     char ch;
     std::getline(cin, str);
     for (int i = 0; i < str.length(); i++){
-            ch = str[i];
-            sum += atoi(&ch);
+            sum += atoi(&str[i]);
         }
     cout << endl << sum;
 }
@@ -142,7 +141,7 @@ void lab713() {
     std::getline(cin, str);
     bool cont = true;
     for (int i = 0; i < str.length(); i++) {
-        if (str.find_last_of(str[i] != i)) {
+        if (str.find_last_of(str[i]) != i) {
             cout << str[i];
             break;
         }
