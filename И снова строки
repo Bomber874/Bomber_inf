@@ -11,8 +11,8 @@ void lab8_26_1() {
     char m[4][4];
     int summ = 0;
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++){
-            m[i][j] = rand();
+        for (int j = 0; j < 4; j++) {
+            m[i][j] = rand() % 127 + 32;
             cout << m[i][j] << "\t";
         }
         cout << "\n";
@@ -23,14 +23,22 @@ void lab8_26_1() {
     cout << "summ=" << summ;
 }
 
-//Введите массив символов из 11 элементов, состоящий из слов и пробе- лов
+//Введите массив символов из 11 элементов, состоящий из слов и пробелов
 void lab8_26_2() {
-    char arr[12];
-    std::cin.getline(arr, 12);
-    cout << arr << sizeof(arr);
+    vector<string> words;
+    for (int i = 0; i < 11; i++) {
+        char* word = new char[100];
+        cin.getline(word, 100);
+        words.push_back(word);
+    }
+
+    for (int i = 0; i < words.size(); i++) {
+        cout << "[" << i << ']' << ' ' << words[i] << endl;
+    }
+    
 }
 
-short find(char *arr, char findSimbol) {
+short find(char* arr, char findSimbol) {
     for (int i = 0; i < strlen(arr); i++) {
         if (arr[i] == findSimbol)
             return i;
@@ -49,48 +57,51 @@ short find(char *arr, char findSimbol) {
 //Даны два массива символов, содержащие тексты.Напечатать те слова, которые встречаются в каждом из двух заданных предложений.
 //dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
 void lab8_26_3() {
-    char text1[] = "Lorem ipsum",
-         text2[] = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur";
+    char text1[] = "Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        text2[] = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur";
     short curPos = 0;
     short spacePos;
     bool next = true;
-    
+
     std::vector<string> words1;
-    cout << strlen(text1);
+    //cout << strlen(text1);
     do {
 
         spacePos = find(text1, ' ');
         next = spacePos == strlen(text1) ? false : true;
-        cout << spacePos - curPos;
-        char* word = new char[spacePos+1 - curPos];
+        //cout << spacePos - curPos;
+        char* word = new char[spacePos + 1 - curPos];
 
         for (int i = curPos; i < spacePos; i++)
         {
-            word[i-curPos] = text1[i];
+            word[i - curPos] = text1[i];
         }
         word[spacePos - curPos] = '\0';
         text1[spacePos] = '1';
-        cout << word;
+        //cout << word;
 
         words1.push_back(word);
 
         delete[] word;
-        curPos = spacePos+1;
+        curPos = spacePos + 1;
 
     } while (next);
     for (int i = 0; i < words1.size(); i++) {
-        cout << words1[i];
+        cout << words1[i] << " ";
     }
+    cout << endl << "======\n";
 
     next = true;
+    curPos = 0;
+    spacePos = 0;
 
     std::vector<string> words2;
-    cout << strlen(text2);
+    //cout << strlen(text2);
     do {
 
         spacePos = find(text2, ' ');
         next = spacePos == strlen(text2) ? false : true;
-        cout << spacePos - curPos;
+        //cout << spacePos - curPos;
         char* word = new char[spacePos + 1 - curPos];
 
         for (int i = curPos; i < spacePos; i++)
@@ -99,7 +110,7 @@ void lab8_26_3() {
         }
         word[spacePos - curPos] = '\0';
         text2[spacePos] = '1';
-        cout << word;
+        //cout << word;
 
         words2.push_back(word);
 
@@ -108,12 +119,19 @@ void lab8_26_3() {
 
     } while (next);
     for (int i = 0; i < words2.size(); i++) {
-        cout << words2[i];
+        cout << words2[i] << " ";
     }
+    cout << '\n';
+    for (int i = 0; i < words1.size(); i++) 
+    for (int k = 0; k < words2.size(); k++) {
+        if (words1[i] == words2[k])
+            cout << words1[i] << endl;
+    }
+
 
 }
 
 int main() {
-    lab8_26_3();
+    lab8_26_2();
     return 0;
 }
