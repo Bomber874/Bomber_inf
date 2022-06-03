@@ -1,0 +1,58 @@
+#include <iostream>;
+#include <cmath>;
+#include <sstream>
+#include <limits>
+#include <vector>
+
+using namespace std;
+
+int numCount(int in) {
+    int i = 0;
+    for (; in > 0; i++)
+        in /= 10;
+    return i;
+}
+
+//В строке после каждого слова дописать ее длину.
+void lab26() {
+    string in;
+    getline(cin, in);
+    string _in = in;
+    int curPos = 0;
+    do {
+        int wordLen = _in.find_first_of(' ');
+        if (wordLen == -1) {
+            in += to_string(_in.length());
+            break;
+        }
+        else {
+            cout << wordLen << '+' << curPos << '=' << wordLen + curPos << endl;
+            in.insert(wordLen + curPos, to_string(wordLen));
+        }
+        _in.erase(0, wordLen + 1);
+        curPos += wordLen + 1 + numCount(wordLen);
+    } while (curPos < in.length());
+    cout << in;
+}
+
+//Дана строка, содержащая пробелы. Найдите в ней самое длинное слово, выведите на экран это слово и его длину.
+
+void lab28() {
+    string str;
+    string out;
+    std::getline(cin, str);
+    do {
+        int spacePos = str.find_first_of(' ');
+        if (spacePos == -1)
+            spacePos = str.length() - 1;
+        if (spacePos > out.length())
+            out = str.substr(0, spacePos + 1);
+        str.erase(0, spacePos + 1);
+    } while (str.length() > 0);
+    cout << endl << out << '='<< out.length();
+}
+
+int main() {
+    lab28();
+    return 0;
+}
